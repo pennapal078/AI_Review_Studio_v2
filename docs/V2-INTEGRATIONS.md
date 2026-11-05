@@ -5,7 +5,7 @@ This branch adds a safe server-side integration foundation. It does **not** clai
 ## Current endpoints
 
 - `GET /api/integrations/status`: reports whether required Cloudflare secrets and bindings exist. It never returns secret values.
-- `POST /api/shopee/lookup`: validates Shopee Thailand URLs and returns a clear setup status. It deliberately does not scrape Shopee pages.
+- Shopee product input in the app is manual: users paste their own Shopee/Affiliate URL and upload the product image. No automatic product lookup or image scraping is performed.
 - `GET /api/video/providers`: lists provider configuration. Google Flow and Meta AI are external/manual destinations, not callable render APIs.
 - `GET /api/facebook/status`: checks presence of server-side Page configuration; it does not claim that OAuth/token validation succeeded.
 - `GET /api/dashboard/summary`: reads recent products and jobs after D1 is bound and the migration is applied.
@@ -34,7 +34,7 @@ Apply `migrations/0001_initial.sql` to the D1 database using the Cloudflare D1 c
 
 ## Integration phases
 
-1. **Shopee:** obtain approved Affiliate Open API access first. Implement the official signed request adapter only after the account's exact API specification and permissions are available. A public product URL alone does not grant API access.
+1. **Shopee:** V2 currently uses a user-pasted product/Affiliate URL and a user-uploaded image. This avoids dependence on Shopee API access for the review workflow. Automatic product metadata/image retrieval is intentionally out of scope unless approved Affiliate Open API access and its exact specification become available.
 2. **Video:** provider adapters must declare supported inputs, output format, pricing/quota, and async job polling. Flow and Meta AI are currently treated as external/manual tools. A genuine MP4 export needs a provider API or a server-side media renderer; it cannot be inferred from a prompt.
 3. **Voice:** use a Thai-capable TTS provider, or browser speech synthesis for preview only. Store generated audio with the job.
 4. **MP4:** compose two scene clips, Thai voice audio, and optional subtitles into 1080x1920 (or provider-supported 9:16) MP4. Confirm codec/duration limits with the selected renderer.
