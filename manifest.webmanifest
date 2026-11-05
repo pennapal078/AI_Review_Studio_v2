@@ -1,0 +1,14 @@
+{
+  "name": "AI REVIEW STUDIO",
+  "short_name": "AI Review",
+  "description": "เครื่องมือช่วยเตรียมคอนเทนต์รีวิวสินค้า",
+  "lang": "th",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f4fa",
+  "theme_color": "#17152b",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
