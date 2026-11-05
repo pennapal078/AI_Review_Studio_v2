@@ -143,17 +143,7 @@ $('aiGenerate').onclick=async()=>{let key=$('apikey').value.trim();if(!key){aler
 $('reset').onclick=()=>{['shopeeUrl','product','features','audience','imagePrompt'].forEach(id=>$(id).value='');$('script').textContent='รอสร้างสคริปต์…';$('caption').textContent='รอสร้างแคปชั่น…';$('scenes').innerHTML='รอสร้างพรอมต์วิดีโอ…';$('preview').style.display='none';currentImage=null;lastText=''};
 
 
-$('lookupShopee').onclick=async()=>{
-  const url=$('shopeeUrl').value.trim();
-  if(!url){$('shopeeStatus').textContent='กรุณาวางลิงก์สินค้า Shopee ก่อน';return}
-  $('lookupShopee').disabled=true;$('shopeeStatus').textContent='กำลังตรวจสอบลิงก์…';
-  try{
-    const r=await fetch('/api/shopee/lookup',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({url})});
-    const d=await r.json();
-    $('shopeeStatus').textContent=d.ok?'ดึงข้อมูลสินค้าแล้ว':(d.message||'ยังไม่สามารถดึงข้อมูลได้');
-  }catch(e){$('shopeeStatus').textContent='เชื่อมต่อ API ไม่สำเร็จ: '+e.message}
-  finally{$('lookupShopee').disabled=false}
-};
+
 async function loadIntegrations(){
   const box=$('integrationStatus');box.textContent='กำลังตรวจสอบ…';
   try{
